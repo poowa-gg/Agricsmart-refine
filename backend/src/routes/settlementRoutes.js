@@ -15,12 +15,17 @@ router.post('/generate-batch', async (req, res) => {
         // Group by vendor
         const settlements = transactions.reduce((acc, tx) => {
             const vendorId = tx.vendor_id;
+            if (!tx.Vendor) {
+                console.warn(`Transaction ${tx.id} has no associated vendor.`);
+                return acc;
+            }
+
             if (!acc[vendorId]) {
                 acc[vendorId] = {
                     vendor_id: vendorId,
-                    business_name: tx.Vendor.business_name,
-                    account_number: tx.Vendor.account_number,
-                    bank_name: tx.Vendor.bank_name,
+                    business_name: tx.Vendor.business_name || 'Unknown Vendor',
+                    account_number: tx.Vendor.account_number || 'N/A',
+                    bank_name: tx.Vendor.bank_name || 'N/A',
                     total_amount: 0,
                     transaction_ids: []
                 };
