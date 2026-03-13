@@ -12,6 +12,7 @@ export const farmersApi = {
 export const vendorsApi = {
     getAll: () => api.get('/vendors'),
     apply: (data: any) => api.post('/vendors/apply', data),
+    register: (data: any) => api.post('/vendors/apply', data),
 };
 
 export const programsApi = {
