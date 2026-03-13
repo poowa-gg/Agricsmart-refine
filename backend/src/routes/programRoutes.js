@@ -3,6 +3,16 @@ const router = express.Router();
 const { Program, Voucher, Farmer } = require('../models');
 const { generateVoucherCode } = require('../utils/voucherEngine');
 
+// Get all programs
+router.get('/', async (req, res) => {
+    try {
+        const programs = await Program.findAll();
+        res.json(programs);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Create a new program
 router.post('/', async (req, res) => {
     try {

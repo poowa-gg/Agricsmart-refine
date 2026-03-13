@@ -5,10 +5,12 @@ const { Transaction, Vendor, sequelize } = require('../models');
 // Generate settlement instructions for a batch
 router.post('/generate-batch', async (req, res) => {
     try {
+        console.log('Fetching verified transactions for settlement...');
         const transactions = await Transaction.findAll({
             where: { status: 'Verified' },
-            include: [Vendor]
+            include: [{ model: Vendor }]
         });
+        console.log(`Found ${transactions.length} verified transactions.`);
 
         // Group by vendor
         const settlements = transactions.reduce((acc, tx) => {
@@ -32,6 +34,7 @@ router.post('/generate-batch', async (req, res) => {
         res.json({ batch_id: Date.now(), instructions: batch });
 
     } catch (error) {
+        console.error('Error generating settlement batch:', error);
         res.status(500).json({ error: error.message });
     }
 });

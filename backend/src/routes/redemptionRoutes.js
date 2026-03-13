@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const { Voucher, Transaction, Vendor, Farmer, Program, Alert } = require('../models');
 
+// Get all vouchers
+router.get('/', async (req, res) => {
+    try {
+        const vouchers = await Voucher.findAll({
+            include: [Farmer, Program]
+        });
+        res.json(vouchers);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Redeem a voucher
 router.post('/redeem', async (req, res) => {
     const { voucherCode, vendorId, farmerPhone } = req.body;

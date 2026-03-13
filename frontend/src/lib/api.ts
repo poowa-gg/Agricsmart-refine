@@ -21,6 +21,7 @@ export const programsApi = {
 };
 
 export const vouchersApi = {
+    getAll: () => api.get('/vouchers'),
     redeem: (data: any) => api.post('/vouchers/redeem', data),
 };
 

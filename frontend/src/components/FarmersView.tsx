@@ -3,7 +3,7 @@
 import React from "react";
 import { UserPlus, MapPin, Phone, CheckCircle2 } from "lucide-react";
 
-export default function FarmersView({ farmers }: { farmers: any[] }) {
+export default function FarmersView({ farmers, onRegister }: { farmers: any[], onRegister?: () => void }) {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex justify-between items-center">
@@ -11,7 +11,10 @@ export default function FarmersView({ farmers }: { farmers: any[] }) {
                     <h2 className="text-2xl font-bold dark:text-white">Farmer Registry</h2>
                     <p className="text-slate-500 text-sm">Verify and manage beneficiary records</p>
                 </div>
-                <button className="btn-primary flex items-center gap-2">
+                <button 
+                    onClick={onRegister}
+                    className="btn-primary flex items-center gap-2"
+                >
                     <UserPlus size={18} />
                     Register New Farmer
                 </button>

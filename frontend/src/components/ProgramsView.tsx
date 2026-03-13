@@ -3,7 +3,7 @@
 import React from "react";
 import { PlusCircle, Calendar, ShieldCheck, ArrowRight, MapPin } from "lucide-react";
 
-export default function ProgramsView({ programs }: { programs: any[] }) {
+export default function ProgramsView({ programs, onCreate }: { programs: any[], onCreate?: () => void }) {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex justify-between items-center">
@@ -11,7 +11,10 @@ export default function ProgramsView({ programs }: { programs: any[] }) {
                     <h2 className="text-2xl font-bold dark:text-white">Program Management</h2>
                     <p className="text-slate-500 text-sm">Design and execute agricultural support initiatives</p>
                 </div>
-                <button className="btn-primary flex items-center gap-2">
+                <button 
+                    onClick={onCreate}
+                    className="btn-primary flex items-center gap-2"
+                >
                     <PlusCircle size={18} />
                     Create New Program
                 </button>
