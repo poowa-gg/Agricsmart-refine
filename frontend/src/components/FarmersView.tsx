@@ -20,44 +20,54 @@ export default function FarmersView({ farmers, onRegister }: { farmers: any[], o
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {farmers.map((farmer) => (
-                    <div key={farmer.id} className="premium-card group hover:border-emerald-500/50 transition-colors">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className="w-12 h-12 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600">
-                                <span className="font-bold text-lg">{farmer.name[0]}</span>
+                    <div key={farmer.id} className="premium-card group hover:border-emerald-500/30 transition-all duration-500">
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="relative">
+                                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 shadow-inner">
+                                    <span className="font-black text-xl">{farmer.name[0]}</span>
+                                </div>
+                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
                             </div>
-                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${farmer.status === 'Active' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-rose-100 text-rose-700'
+                            <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${farmer.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
                                 }`}>
                                 {farmer.status}
                             </span>
                         </div>
 
                         <div className="flex justify-between items-center mb-1">
-                            <h3 className="font-bold text-lg text-slate-800 dark:text-white">{farmer.name}</h3>
+                            <h3 className="font-black text-lg text-slate-800 dark:text-white tracking-tight">{farmer.name}</h3>
                             {farmer.agri_score !== undefined && (
-                                <div className="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 px-2 py-0.5 rounded text-xs font-bold border border-blue-200 dark:border-blue-800">
-                                    <span className="text-[10px] uppercase">AgriScore</span>
-                                    <span>{Math.round(farmer.agri_score)}</span>
+                                <div className="flex items-center gap-1.5 bg-blue-50/50 dark:bg-blue-500/10 text-blue-600 px-2 py-1 rounded-lg text-[10px] font-black border border-blue-100 dark:border-blue-500/20 uppercase tracking-tighter">
+                                    <span>AgriScore</span>
+                                    <span className="text-sm">{Math.round(farmer.agri_score)}</span>
                                 </div>
                             )}
                         </div>
-                        <p className="text-slate-500 text-xs font-mono mb-4">{farmer.farmer_id}</p>
+                        <p className="text-slate-400 text-[10px] font-mono font-bold uppercase tracking-widest mb-6 px-1 italic">UID: {farmer.farmer_id}</p>
 
-                        <div className="space-y-2 mt-4">
-                            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                                <Phone size={14} />
+                        <div className="space-y-3 mt-4">
+                            <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 font-medium bg-slate-50/50 dark:bg-slate-900/30 p-2.5 rounded-xl border border-transparent hover:border-slate-200/50 transition-all">
+                                <div className="p-1.5 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                                    <Phone size={14} className="text-slate-400" />
+                                </div>
                                 <span>{farmer.phone}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                                <MapPin size={14} />
+                            <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 font-medium bg-slate-50/50 dark:bg-slate-900/30 p-2.5 rounded-xl border border-transparent hover:border-slate-200/50 transition-all">
+                                <div className="p-1.5 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                                    <MapPin size={14} className="text-slate-400" />
+                                </div>
                                 <span>{farmer.state}, {farmer.lga}</span>
                             </div>
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Consent Verified</span>
-                            <CheckCircle2 size={16} className="text-emerald-500" />
+                        <div className="mt-8 pt-5 border-t border-slate-100/60 dark:border-slate-800/60 flex justify-between items-center">
+                            <div className="flex items-center gap-1.5">
+                                <CheckCircle2 size={16} className="text-emerald-500" />
+                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">KYC Verified</span>
+                            </div>
+                            <button className="text-[10px] font-black text-emerald-600 hover:text-emerald-700 uppercase tracking-widest transition-colors">Details →</button>
                         </div>
                     </div>
                 ))}
